@@ -12,7 +12,7 @@ from flask import Flask, request, jsonify, Response, stream_with_context
 app = Flask("proxy")
 
 target_url = "https://api.openai.com/"
-auth = "pxBn3a9rzqC4bg)2bHsB"
+auth_secret = "<a hard to guess secret>"
 
 
 @app.route("/<path:path>", methods=["POST"])
@@ -30,7 +30,7 @@ def proxy(path):
     # auth is required in request body
     if "auth" not in data:
         return jsonify({}), 401
-    if data["auth"] != auth:
+    if data["auth"] != auth_secret:
         return jsonify({}), 401
     del data["auth"]
 
