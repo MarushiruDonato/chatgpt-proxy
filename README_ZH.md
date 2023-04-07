@@ -1,31 +1,26 @@
-[中文 README](README_ZH.md)
+一个用来转发OpenAI请求的代理
 
-a proxy for forwarding OpenAI chat completion requests
-
-# Usage
-
-1. install requirements
-
+# 怎么用
+1. 装依赖
 ```bash
 pip install -r requirements.txt
 ```
+2. 跑起来
 
-2. run the server
-
-*Note: Your server has to be in the region which has access to OpenAI APIs.*
+*首先你跑这个程序的服务器要能访问OpenAI的api*
 
 ```bash
 python proxy.py
 ```
 
-or run with gunicon
+或者用gunicorn跑
 
 ```bash
 pip install gunicorn
 gunicorn -w 4 -b "0.0.0.0:5000" proxy:app --log-level=debug
 ```
 
-4. send requests
+3. 发请求
 
 ```python
 import requests
@@ -44,4 +39,3 @@ headers = {"Authorization": "Bearer <your-openai-token>"}
 resp = requests.post("http://<your-server-ip>:5000/v1/chat/completions", headers=headers, json=data)
 
 ```
-
