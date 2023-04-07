@@ -4,6 +4,10 @@ a proxy for forwarding OpenAI chat completion requests
 
 # Usage
 
+0. set a custom auth secret in `proxy.py`
+
+    Edit the `auth_secret` variable in `proxy.py` to a custom secret string.
+
 1. install requirements
 
 ```bash
@@ -25,12 +29,13 @@ pip install gunicorn
 gunicorn -w 4 -b "0.0.0.0:5000" proxy:app --log-level=debug
 ```
 
-4. send requests
+3. send requests
 
 ```python
 import requests
 
 data = {
+    # don't forget this auth in your request body
     "auth": "<your-custom-auth-secret>",
     "model": "gpt-3.5-turbo",
     "messages": [
